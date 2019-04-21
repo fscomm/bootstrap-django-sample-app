@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    container_name: db
+    image: postgres:9.5
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: django
+      POSTGRES_USER: django
+      POSTGRES_PASSWORD: django
+  django_app:
+    build:
+      context: .
+    container_name: django_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
